@@ -24,6 +24,10 @@ public abstract class Piece {
      * Returns the number of moves made by the piece
      * @return number of moves
      */
+    
+    public abstract String getKind();
+    public abstract void setImageNumber(int in);
+    
     public int getNumberOfMoves() {
         return numMoves;
     }

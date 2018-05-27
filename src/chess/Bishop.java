@@ -10,7 +10,7 @@ import java.awt.image.BufferedImage;
  */
 public class Bishop extends Piece{
        
-    private final int imageNumber = 2;
+    private int imageNumber = 3;
     
     /**
      * Creates a new bishop
@@ -38,6 +38,19 @@ public class Bishop extends Piece{
     /**
     * @return index of the piece's image in an array
     */
+    
+    
+    public String getKind()
+    {
+    	return "Bishop";
+    }
+    public void setImageNumber(int in)
+    {
+    	this.imageNumber = in;
+    }
+    
+    
+    
     public int getImageNumber() {
         return imageNumber;
     }
@@ -47,7 +60,7 @@ public class Bishop extends Piece{
      * @return white image
      */
     public BufferedImage getWhiteImage() {
-        return whiteImages[imageNumber];
+        return whiteImages[2];
     }
     
     /**
@@ -55,7 +68,7 @@ public class Bishop extends Piece{
      * @return black image
      */
     public BufferedImage getBlackImage() {
-        return blackImages[imageNumber];
+        return blackImages[2];
     }
     
     /**

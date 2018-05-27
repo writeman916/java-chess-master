@@ -8,6 +8,7 @@ package chessgame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -26,6 +27,18 @@ import chess.GamePanel;
 
 public class GameWindow extends javax.swing.JFrame{
 
+	
+	
+	private javax.swing.JMenuBar jMenuBar_Main;
+    private javax.swing.JMenuItem jMenuItem_Close;
+    private javax.swing.JMenuItem jMenuItem_New1P;
+    private javax.swing.JMenuItem jMenuItem_New2P;
+    private javax.swing.JMenu jMenu_File;
+    private javax.swing.JMenu jMenu_Game;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    
+    
     GamePanel gameScreen;
     
     /** 
@@ -34,20 +47,89 @@ public class GameWindow extends javax.swing.JFrame{
     public GameWindow() {
         initComponents();
         init();
+        initPanel();
+        
     }
    
     /**
      * Initializes the game in the form
      */
+    
+
+    private void initPanel()
+    {
+    	
+    	JLabel Pawn = new JLabel("Pawn:");
+		Pawn.setBounds(900, 150, 50, 50);
+		jPanel1.add(Pawn);
+		
+		JLabel PawnValue = new JLabel();
+		PawnValue.setBounds(950, 150, 50, 50);
+		PawnValue.setText(String.valueOf(gameScreen.gameBoard.getPieces().get(7).getImageNumber()));
+		jPanel1.add(PawnValue);
+		
+		
+		JLabel Rook = new JLabel("Rook:");
+		Rook.setBounds(900, 200, 50, 50);
+		jPanel1.add(Rook);
+		
+		JLabel RookValue = new JLabel();
+		RookValue.setBounds(950, 200, 50, 50);
+		RookValue.setText(String.valueOf(gameScreen.gameBoard.getPieces().get(8).getImageNumber()));
+		jPanel1.add(RookValue);
+		
+		
+		
+		JLabel Knight = new JLabel("Knight:");
+		Knight.setBounds(900, 250, 50, 50);
+		jPanel1.add(Knight);
+		
+		JLabel KnightValue = new JLabel();
+		KnightValue.setBounds(950, 250, 50, 50);
+		KnightValue.setText(String.valueOf(gameScreen.gameBoard.getPieces().get(9).getImageNumber()));
+		jPanel1.add(KnightValue);
+		
+		
+		JLabel Bishop = new JLabel("Bishop:");
+		Bishop.setBounds(900, 300, 50, 50);
+		jPanel1.add(Bishop);
+		
+		JLabel BishopValue = new JLabel();
+		BishopValue.setBounds(950, 300, 50, 50);
+		BishopValue.setText(String.valueOf(gameScreen.gameBoard.getPieces().get(10).getImageNumber()));
+		jPanel1.add(BishopValue);
+		
+		
+		
+		JLabel Queen = new JLabel("Queen:");
+		Queen.setBounds(900, 350, 50, 50);
+		jPanel1.add(Queen);
+		
+		JLabel QueenValue = new JLabel();
+		QueenValue.setBounds(950, 350, 50, 50);
+		QueenValue.setText(String.valueOf(gameScreen.gameBoard.getPieces().get(11).getImageNumber()));
+		
+		
+//		System.out.println("ngoai"+gameScreen.gameBoard.getPieces().get(11).getImageNumber());
+		
+		
+		jPanel1.add(QueenValue);
+		
+		
+		
+		
+		
+		
+    }
+    
     private void init()
     {
         gameScreen = new GamePanel(jPanel1.getWidth(), jPanel1.getHeight());
         jPanel1.add(gameScreen);
-        
-        
+       
 		
 		JButton Surrender =new JButton("Surrender");
-		Surrender.setBounds(900, 100, 100, 50);
+		Surrender.setBounds(850, 100, 100, 50);
 		Surrender.addActionListener(new ActionListener(){    // actionPerformed duoc goi khi 1 action xuat hien
 
 			@Override
@@ -59,87 +141,97 @@ public class GameWindow extends javax.swing.JFrame{
 			}
 		});
 		jPanel1.add(Surrender);
-        
-        
-		JLabel Pawn = new JLabel("Pawn:");
-		Pawn.setBounds(900, 150, 50, 50);
-		jPanel1.add(Pawn);
-		
-		JLabel PawnValue = new JLabel();
-		PawnValue.setBounds(950, 150, 50, 50);
-		PawnValue.setText(String.valueOf(gameScreen.L.get(7).getImageNumber()));
-		jPanel1.add(PawnValue);
 		
 		
 		
-		JLabel Rook = new JLabel("Rook:");
-		Rook.setBounds(900, 200, 50, 50);
-		jPanel1.add(Rook);
-		
-		JLabel RookValue = new JLabel();
-		RookValue.setBounds(950, 200, 50, 50);
-		RookValue.setText(String.valueOf(gameScreen.L.get(8).getImageNumber()));
-		jPanel1.add(RookValue);
 		
 		
-		
-		JLabel Knight = new JLabel("Knight:");
-		Knight.setBounds(900, 250, 50, 50);
-		jPanel1.add(Knight);
-		
-		JLabel KnightValue = new JLabel();
-		KnightValue.setBounds(950, 250, 50, 50);
-		KnightValue.setText(String.valueOf(gameScreen.L.get(9).getImageNumber()));
-		jPanel1.add(KnightValue);
-		
-		
-		JLabel Bishop = new JLabel("Bishop:");
-		Bishop.setBounds(900, 300, 50, 50);
-		jPanel1.add(Bishop);
-		
-		JLabel BishopValue = new JLabel();
-		BishopValue.setBounds(950, 300, 50, 50);
-		BishopValue.setText(String.valueOf(gameScreen.L.get(10).getImageNumber()));
-		jPanel1.add(BishopValue);
+		JButton Undo =new JButton("Undo");
+		Undo.setBounds(1000, 100, 100, 50);
+		Undo.addActionListener(new ActionListener(){    // actionPerformed duoc goi khi 1 action xuat hien
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+			   gameScreen.undo();
+			}
+		});
+		jPanel1.add(Undo);
 		
 		
 		
-		JLabel Queen = new JLabel("Queen:");
-		Queen.setBounds(900, 350, 50, 50);
-		jPanel1.add(Queen);
+		JButton twoAI =new JButton("2 AI");
+		twoAI.setBounds(1100, 100, 100, 50);
+		twoAI.addActionListener(new ActionListener(){    // actionPerformed duoc goi khi 1 action xuat hien
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+			   gameScreen.new2AiGame();
+			}
+		});
+		jPanel1.add(twoAI);
 		
-		JLabel QueenValue = new JLabel();
-		QueenValue.setBounds(950, 350, 50, 50);
-		QueenValue.setText(String.valueOf(gameScreen.L.get(11).getImageNumber()));
-		jPanel1.add(QueenValue);
+		
+		
+		
+		
+		initPanel();
     }
     
     private void initComponents() {
 
         jPanel1 = new JPanel();
+//        jPanel2 = new JPanel();
+ 
         jMenuBar_Main = new JMenuBar();
         jMenu_Game = new javax.swing.JMenu();
         jMenuItem_New1P = new JMenuItem();
         jMenuItem_New2P = new JMenuItem();
-        jMenuItem_Undo = new JMenuItem();
         jMenuItem_Close = new JMenuItem();
         jMenu_File = new JMenu();
-
+        
+        
+        
+//        jPanel1.add(jPanel2);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Chess Game");
         setLocationByPlatform(true);
+        
+        
+//        GroupLayout jPanel2Layout = new GroupLayout(jPanel2);
+//        
+//        
+//        jPanel2.setLayout(jPanel2Layout);
+//        jPanel2Layout.setHorizontalGroup(
+//            jPanel2Layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
+//            .addGap(800, 1200, Short.MAX_VALUE)
+//        );
+//        jPanel2Layout.setVerticalGroup(
+//            jPanel2Layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
+//            .addGap(800, 1200, Short.MAX_VALUE)
+//        );
+//        
+        
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        GroupLayout jPanel1Layout = new GroupLayout(jPanel1);
+        
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGap(0, 800, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGap(0, 800, Short.MAX_VALUE)
         );
+       
+        
+      
+        
+        
+        
+        
+        
 
         jMenu_Game.setText("Game");
 
@@ -159,13 +251,6 @@ public class GameWindow extends javax.swing.JFrame{
         });
         jMenu_Game.add(jMenuItem_New2P);
 
-        jMenuItem_Undo.setText("Undo");
-        jMenuItem_Undo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem_UndoActionPerformed(evt);
-            }
-        });
-        jMenu_Game.add(jMenuItem_Undo);
 
         jMenuItem_Close.setText("Close");
         jMenuItem_Close.addActionListener(new java.awt.event.ActionListener() {
@@ -183,23 +268,29 @@ public class GameWindow extends javax.swing.JFrame{
 
         setJMenuBar(jMenuBar_Main);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        GroupLayout layout = new GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
+        
+     
+        
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            layout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 800, Short.MAX_VALUE)
+                .addComponent(jPanel1, 0, 800, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            layout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 800, Short.MAX_VALUE)
+                .addComponent(jPanel1, 0, 800, Short.MAX_VALUE)
                 .addContainerGap())
         );
-
+        
+        
+        
+         
         pack();
     }// </editor-fold>//GEN-END:initComponents
     
@@ -212,12 +303,10 @@ private void jMenuItem_New2PActionPerformed(java.awt.event.ActionEvent evt) {//G
 }//GEN-LAST:event_jMenuItem_New2PActionPerformed
 
 
-private void jMenuItem_UndoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem_UndoActionPerformed
-    gameScreen.undo();
-}//GEN-LAST:event_jMenuItem_UndoActionPerformed
-
 private void jMenuItem_New1PActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem_New1PActionPerformed
     gameScreen.newAiGame();
+    initPanel();
+    repaint();
 }//GEN-LAST:event_jMenuItem_New1PActionPerformed
 
 private void jPanel1_componentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jPanel1_componentResized
@@ -242,15 +331,5 @@ private void jPanel1_componentResized(java.awt.event.ComponentEvent evt) {//GEN-
         });
     }
     
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenuBar jMenuBar_Main;
-    private javax.swing.JMenuItem jMenuItem_Close;
-    private javax.swing.JMenuItem jMenuItem_New1P;
-    private javax.swing.JMenuItem jMenuItem_New2P;
-    private javax.swing.JMenuItem jMenuItem_Undo;
-    private javax.swing.JMenu jMenu_File;
-    private javax.swing.JMenu jMenu_Game;
-    private javax.swing.JPanel jPanel1;
-    // End of variables declaration//GEN-END:variables
 
 }

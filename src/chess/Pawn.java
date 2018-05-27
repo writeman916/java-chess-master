@@ -10,7 +10,7 @@ import java.util.ArrayList;
  */
 public class Pawn extends Piece {
     
-    private final int imageNumber = 0;
+    private int imageNumber = 1;
     
     public boolean enPassantOk = false;
     
@@ -56,6 +56,20 @@ public class Pawn extends Piece {
      *  [0]:pawn [1]:knight [2]:bishop [3]:rook [4]:queen [5]:king
      * @return array index
      */
+    
+    
+    public String getKind()
+    {
+    	return "Pawn";
+    }
+    
+    public void setImageNumber(int in)
+    {
+    	this.imageNumber = in;
+    }
+    
+    
+    
     public int getImageNumber() {
         return imageNumber;
     }
@@ -65,7 +79,7 @@ public class Pawn extends Piece {
      * @return white image
      */
     public BufferedImage getWhiteImage() {
-        return whiteImages[imageNumber];
+        return whiteImages[0];
     }
     
     /**
@@ -73,7 +87,7 @@ public class Pawn extends Piece {
      * @return black image
      */
     public BufferedImage getBlackImage() {
-        return blackImages[imageNumber];
+        return blackImages[0];
     }
     
     /**

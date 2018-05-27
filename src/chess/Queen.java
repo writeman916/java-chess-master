@@ -10,13 +10,14 @@ import java.util.ArrayList;
  */
 public class Queen extends Piece{
            
-    private final int imageNumber = 4;
+    private int imageNumber = 5;
     
     /**
      * Creates a new queen
      * @param location location of the piece
      * @param color color of the piece
      */
+    
     public Queen(Point location, Color color) {
         numMoves = 0;
         this.color = color;
@@ -29,6 +30,7 @@ public class Queen extends Piece{
      * @param color color of the piece
      * @param moves the number of moves made by the piece
      */
+    
     private Queen(Point location, Color color, int moves) {
         this.numMoves = moves;
         this.color = color;
@@ -42,6 +44,19 @@ public class Queen extends Piece{
      *  [0]:pawn [1]:knight [2]:bishop [3]:rook [4]:queen [5]:king
      * @return array index
      */
+    public String getKind()
+    {
+    	return "Queen";
+    }
+    
+    
+    public void setImageNumber(int in)
+    {
+    	this.imageNumber = in;
+    }
+    
+    
+    
     public int getImageNumber() {
         return imageNumber;
     }
@@ -51,7 +66,7 @@ public class Queen extends Piece{
      * @return white image
      */
     public BufferedImage getWhiteImage() {
-        return whiteImages[imageNumber];
+        return whiteImages[4];
     }
     
     /**
@@ -59,7 +74,7 @@ public class Queen extends Piece{
      * @return black image
      */
     public BufferedImage getBlackImage() {
-        return blackImages[imageNumber];
+        return blackImages[4];
     }
     
     /**

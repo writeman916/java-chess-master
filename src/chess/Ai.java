@@ -22,6 +22,7 @@ public class Ai implements Serializable{
         this.depth = depth;
     }
     
+   
     /**
      * Returns the color of the pieces the AI controls
      * @return color of the AI pieces

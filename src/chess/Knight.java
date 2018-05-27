@@ -10,7 +10,7 @@ import java.util.ArrayList;
  */
 public class Knight extends Piece{
        
-    private final int imageNumber = 1;
+    private int imageNumber = 2;
     
     /**
      * Creates a new knight
@@ -42,6 +42,21 @@ public class Knight extends Piece{
      *  [0]:pawn [1]:knight [2]:bishop [3]:rook [4]:queen [5]:king
      * @return array index
      */
+    
+    
+    
+    public String getKind()
+    {
+    	return "Knight";
+    }
+    
+    
+    public void setImageNumber(int in)
+    {
+    	this.imageNumber = in;
+    }
+    
+    
     public int getImageNumber() {
         return imageNumber;
     }
@@ -51,7 +66,7 @@ public class Knight extends Piece{
      * @return white image
      */
     public BufferedImage getWhiteImage() {
-        return whiteImages[imageNumber];
+        return whiteImages[1];
     }
     
     /**
@@ -59,7 +74,7 @@ public class Knight extends Piece{
      * @return black image
      */
     public BufferedImage getBlackImage() {
-        return blackImages[imageNumber];
+        return blackImages[1];
     }
     
     /**

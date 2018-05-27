@@ -10,7 +10,7 @@ import java.util.ArrayList;
  */
 public class King extends Piece{
        
-    private final int imageNumber = 5;
+    private final int imageNumber = 6;
     
     /**
      * Creates a new king
@@ -46,12 +46,18 @@ public class King extends Piece{
         return imageNumber;
     }
 
+    
+    
+    public String getKind()
+    {
+    	return "King";
+    }
     /**
      * Returns the white image for this piece
      * @return white image
      */
     public BufferedImage getWhiteImage() {
-        return whiteImages[imageNumber];
+        return whiteImages[5];
     }
     
     /**
@@ -59,7 +65,7 @@ public class King extends Piece{
      * @return black image
      */
     public BufferedImage getBlackImage() {
-        return blackImages[imageNumber];
+        return blackImages[5];
     }
     
     /**
@@ -176,4 +182,9 @@ public class King extends Piece{
             }
         }
     }
+
+	@Override
+	public void setImageNumber(int in) {
+		
+	}
 }

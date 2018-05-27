@@ -17,6 +17,7 @@ public class Board implements Serializable, Cloneable {
     private Piece inCheck = null;
     private Piece lastMoved = null;
     private Ai ai = null;
+    private Ai ai2 = null;
     
     /**
      * Sets an Ai for the board
@@ -26,12 +27,23 @@ public class Board implements Serializable, Cloneable {
         this.ai = computerPlayer;
     }
     
+    public void set2Ai(Ai computerPlayer1, Ai computerPlayer2) {
+        this.ai = computerPlayer1;
+        this.ai2 = computerPlayer2;
+    }
+    
+    
     /**
      * Returns the Ai object for the board. 
      * @return the Ai object of the board. Null if 2-player game.
      */
     public Ai getAi() {
         return ai;
+    }
+    
+    
+    public Ai getAi2() {
+        return ai2;
     }
     
     /**
@@ -66,7 +78,7 @@ public class Board implements Serializable, Cloneable {
             pieces.add(new Pawn(new Point(4, 1), Piece.Color.Black));
             pieces.add(new Pawn(new Point(5, 1), Piece.Color.Black));
             pieces.add(new Pawn(new Point(6, 1), Piece.Color.Black));
-            pieces.add(new Pawn(new Point(7, 1), Piece.Color.Black));
+            pieces.add(new Pawn(new Point(7, 1), Piece.Color.Black)); //7
 
             pieces.add(new Rook(new Point(0, 0), Piece.Color.Black));
             pieces.add(new Knight(new Point(1, 0), Piece.Color.Black));
@@ -75,7 +87,7 @@ public class Board implements Serializable, Cloneable {
             pieces.add(new King(new Point(4, 0), Piece.Color.Black));
             pieces.add(new Bishop(new Point(5, 0), Piece.Color.Black));
             pieces.add(new Knight(new Point(6, 0), Piece.Color.Black));
-            pieces.add(new Rook(new Point(7, 0), Piece.Color.Black));
+            pieces.add(new Rook(new Point(7, 0), Piece.Color.Black)); //15
 
             // white pieces
             pieces.add(new Pawn(new Point(0, 6), Piece.Color.White));
@@ -186,6 +198,21 @@ public class Board implements Serializable, Cloneable {
         return turn;
     }
     
+    
+    
+    public void setWeight(int[] weight, Piece.Color color)
+    {
+    	  for(Piece pc : pieces) {
+            if(pc.getColor() == color )
+            {
+            	if(pc.getKind().equals("Pawn")) pc.setImageNumber(weight[0]);
+            	if(pc.getKind().equals("Knight")) pc.setImageNumber(weight[1]);
+            	if(pc.getKind().equals("Bishop")) pc.setImageNumber(weight[2]);
+            	if(pc.getKind().equals("Rook")) pc.setImageNumber(weight[3]);
+            	if(pc.getKind().equals("Queen")) pc.setImageNumber(weight[4]);
+            }
+          }
+    }
     /**
      * Performs the given move. Does not check validity. Use only moves from
      *  the Pieces' getValidMoves() methods.
@@ -235,6 +262,8 @@ public class Board implements Serializable, Cloneable {
      * @param showDialog Whether or not to ask the user what to promote pawn to. 
      * If false, automatically promotes to Queen.
      */
+    
+    
     private void checkPawnPromotion(Piece pawn, boolean showDialog) {
         if(pawn instanceof Pawn && (pawn.getLocation().y == 0 || pawn.getLocation().y == 7)) {
             Piece promoted;
@@ -242,7 +271,8 @@ public class Board implements Serializable, Cloneable {
             // if ai, promote automatically to queen
             if (!showDialog || (ai != null && ai.getColor() == pawn.getColor())) {
                 promoted = new Queen(pawn.getLocation(), pawn.getColor());
-            } else { 
+            }
+            else { 
                 // else, give the player a choice
                 Object type = javax.swing.JOptionPane.showInputDialog(
                         null, "", 
@@ -374,6 +404,18 @@ public class Board implements Serializable, Cloneable {
         return (whiteMoves.size() == 0 || blackMoves.size() == 0);
     }
     
+    
+    public boolean AILoser()
+    {
+    	List<Move> AIMove = new ArrayList<Move>();
+    	for(Piece p : pieces)
+    	{
+    		if(p.getColor() == ai.getColor())
+    			AIMove.addAll(p.getValidMoves(this, true));
+    	}
+    	
+    	return (AIMove.size() == 0);
+    }
     /**
      * Returns a copy of the Board
      * @return a copy of this board
