@@ -7,7 +7,7 @@ import java.io.Serializable;
 public class Ai implements Serializable{
     
     private Piece.Color aiColor;
-    private int depth = 3;
+    private int depth = 2;
 
 
     public Ai(Piece.Color color, int depth) {
@@ -164,8 +164,8 @@ public class Ai implements Serializable{
                 }
             }
 
-        value = (aiPieces - playerPieces) + (aiMoves - playerMoves)
-                + (aiCaptures - playerCaptures)*5;
+        value = (aiPieces - playerPieces)*2 + (aiMoves - playerMoves)
+                + (aiCaptures - playerCaptures)*4;
 
         // if a side can make no valid moves, the game is over
         if (gameBoard.getTurn() == aiColor && aiMoves == 0)
@@ -181,6 +181,6 @@ public class Ai implements Serializable{
        
 
     private int valueOfPiece(Piece pc) {
-        return (int)Math.pow(pc.getImageNumber() + 1, 3) * 100;
+        return (int)Math.pow(pc.getImageNumber() + 1 , 3) * 100;
     }
 }

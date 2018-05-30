@@ -134,6 +134,7 @@ public class King extends Piece{
     
    
     private void addIfValid(Board board, List<Move> list, Point pt) {
+     
         if(board.validLocation(pt)) {
             Piece pc = board.getPieceAt(pt);
             if(pc == null || pc.getColor() != this.color) {

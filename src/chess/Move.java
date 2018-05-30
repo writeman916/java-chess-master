@@ -16,7 +16,12 @@ public class Move {
     }
     
 
-    public Point getMoveTo() {
+    public Move() {
+   
+	}
+
+
+	public Point getMoveTo() {
         return moveTo;
     }
     

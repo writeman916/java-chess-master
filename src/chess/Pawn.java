@@ -69,7 +69,7 @@ public class Pawn extends Piece {
             return moves;
 
         // checks moves where the pawn advances a rank
-        advance(board, moves);
+        addIfValid(board, moves);
         // checks moves where the pawn captures another piece
         capture(board, moves);
         // checks en passant moves
@@ -90,25 +90,21 @@ public class Pawn extends Piece {
     }
     
   
-    private void advance(Board board, List<Move> moves) {
+    private void addIfValid(Board board, List<Move> moves) {
         int x = location.x;
         int y = location.y;
-        
         Piece pc;
         Point pt;
         int move;
-        
         if (color == Color.White)
             move = -1;
         else
             move = 1;
-                
         pt = new Point(x, y + move);
         if (board.validLocation(pt)) {
             pc = board.getPieceAt(pt);            
             if(pc == null) {
                 moves.add(new Move(this, pt, pc));     
-                
                 pt = new Point(x, y + move * 2);
                 if (board.validLocation(pt)) {
                     pc = board.getPieceAt(pt);
@@ -155,11 +151,9 @@ public class Pawn extends Piece {
         
         if (this.color == Color.White && this.location.y == 3) {
             if(canCaptureEnPassant(board, new Point(x - 1, y)))
-                moves.add(new Move(this, new Point(x - 1, y - 1),
-                        board.getPieceAt(new Point(x - 1, y))));
+                moves.add(new Move(this, new Point(x - 1, y - 1),board.getPieceAt(new Point(x - 1, y))));
             if(canCaptureEnPassant(board, new Point(x + 1, y)))
-                moves.add(new Move(this, new Point(x + 1, y - 1),
-                        board.getPieceAt(new Point(x + 1, y)))); 
+                moves.add(new Move(this, new Point(x + 1, y - 1),board.getPieceAt(new Point(x + 1, y)))); 
         }
         if (this.color == Color.Black && this.location.y == 4) {
             if(canCaptureEnPassant(board, new Point(x - 1, y)))

@@ -258,8 +258,7 @@ public class Board implements Serializable, Cloneable {
             Piece rook = helper.getPieceAt(c.getRook().getLocation());
             
             // performs the move on the copied board
-            helper.doMove(new CastleMove(king, c.getMoveTo(),
-                    rook, c.getRookMoveTo()), false);
+            helper.doMove(new CastleMove(king, c.getMoveTo(),rook, c.getRookMoveTo()), false);
         } else {       
             // creates a copy of the move for the copied board
             Piece capture = null;

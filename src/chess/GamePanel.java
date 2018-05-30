@@ -27,7 +27,7 @@ public class GamePanel extends JComponent implements MouseListener {
 
 	GameStatus status = GameStatus.Idle;
 	boolean imagesLoaded = false;
-	
+
 	Random rand = new Random();
 
 	public Board gameBoard;
@@ -38,10 +38,10 @@ public class GamePanel extends JComponent implements MouseListener {
 	Piece invalidPiece = null;
 	// a list of the possible moves for the selected piece
 	List<Move> okMoves;
-	
+
 	// list weight for Pieces
 	List<int[]> listW = new ArrayList<int[]>();
-	
+
 	// defines color variables for different elements of the game
 	final Color invalidColor = new Color(255, 0, 0, 127);
 	final Color selectionColor = new Color(255, 255, 0, 127);
@@ -51,7 +51,6 @@ public class GamePanel extends JComponent implements MouseListener {
 	final Color lightColor = new Color(255, 255, 255, 255);
 	final Color darkColor = new Color(0, 0, 0, 255);
 
-
 	public GamePanel(int w, int h) {
 		// set the size of the component
 		this.setSize(w, h);
@@ -60,16 +59,13 @@ public class GamePanel extends JComponent implements MouseListener {
 		// inititalizes the game board for a 2-player game
 		newGame();
 		// adds a listener for mouse events
-		
-		
-		for(int i=0;i<25;i++)
-		{
+
+		for (int i = 0; i < 25; i++) {
 			listW.add(RandArray(5));
 		}
-		
+
 		this.addMouseListener(this);
 	}
-
 
 	public void newGame() {
 		// creates a new board
@@ -84,7 +80,6 @@ public class GamePanel extends JComponent implements MouseListener {
 		this.repaint();
 	}
 
-	
 	public void new2AiGame() {
 		System.out.println("2 AI fight");
 		int aiDepth = 3;
@@ -94,72 +89,57 @@ public class GamePanel extends JComponent implements MouseListener {
 		// creates a new game
 		newGame();
 		// then sets the ai for the board
-		int test1 =  rand.nextInt(listW.size());
-		int test2  = -1;
-		while(test2 == -1)
-		{
+		int test1 = rand.nextInt(listW.size());
+		int test2 = -1;
+		while (test2 == -1) {
 			int value = rand.nextInt(listW.size());
-			if( value != test1)
-			{
-				test2 =  value;
+			if (value != test1) {
+				test2 = value;
 			}
 		}
-		
-		
+
 		int[] weight1 = listW.get(test1);
 		int[] weight2 = listW.get(test2);
-		
-		
-		
+
 		gameBoard.set2Ai(new Ai(aiColor1, aiDepth), new Ai(aiColor2, aiDepth));
-		
+
 		gameBoard.setWeight(weight1, aiColor1);
 		gameBoard.setWeight(weight2, aiColor2);
-	
+
 		System.out.println(listW.size());
-		for(int i=0;i<listW.size();i++)
-		{
-			System.out.println(listW.get(i)[0]+","+listW.get(i)[1]+","+listW.get(i)[2]+","+listW.get(i)[3]+","+listW.get(i)[4]);
+		for (int i = 0; i < listW.size(); i++) {
+			System.out.println(listW.get(i)[0] + "," + listW.get(i)[1] + "," + listW.get(i)[2] + "," + listW.get(i)[3]
+					+ "," + listW.get(i)[4]);
 		}
-		
+
 		System.out.println("1-Pawn Knight Bishop Rook Queen");
-		System.out.println(weight1[0] + "      " + " " + weight1[1] + "    " + weight1[2] + "      " + weight1[3] + "\t" + weight1[4]);
-	
-		
+		System.out.println(weight1[0] + "      " + " " + weight1[1] + "    " + weight1[2] + "      " + weight1[3] + "\t"
+				+ weight1[4]);
+
 		System.out.println("2-Pawn Knight Bishop Rook Queen");
-		System.out.println(weight2[0] + "      " + " " + weight2[1] + "    " + weight2[2] + "      " + weight2[3] + "\t" + weight2[4]);
-	
+		System.out.println(weight2[0] + "      " + " " + weight2[1] + "    " + weight2[2] + "      " + weight2[3] + "\t"
+				+ weight2[4]);
+
 		while (!gameBoard.gameOver()) {
 			twoplayerAI();
 		}
-		
-		
-		
-	
 
-		
-		
-		if(gameBoard.gameOver())
-		{
-			if(gameBoard.AILoser())
-			{
-				if(listW.size() > 1)
+		if (gameBoard.gameOver()) {
+			if (gameBoard.AILoser()) {
+				if (listW.size() > 1)
 					listW.remove(weight1);
 				System.out.println("Xoa weight 1");
-			}
-			else
-			{
-				if(listW.size() > 1)
+			} else {
+				if (listW.size() > 1)
 					listW.remove(weight2);
 				System.out.println("Xoa weight 2");
 			}
 		}
-		
-		
+
 		System.out.println(listW.size());
-		for(int i=0;i<listW.size();i++)
-		{
-			System.out.println(listW.get(i)[0]+","+listW.get(i)[1]+","+listW.get(i)[2]+","+listW.get(i)[3]+","+listW.get(i)[4]);
+		for (int i = 0; i < listW.size(); i++) {
+			System.out.println(listW.get(i)[0] + "," + listW.get(i)[1] + "," + listW.get(i)[2] + "," + listW.get(i)[3]
+					+ "," + listW.get(i)[4]);
 		}
 
 	}
@@ -169,38 +149,28 @@ public class GamePanel extends JComponent implements MouseListener {
 		int aiDepth;
 		Piece.Color aiColor;
 
-
 		aiDepth = 3;
 
 		aiColor = Piece.Color.Black;
 
 		// creates a new game
 		newGame();
-		
+
 		int testWeight = rand.nextInt(listW.size());
 		int[] weight = listW.get(testWeight);
-		
 
 		gameBoard.setAi(new Ai(aiColor, aiDepth));
 		gameBoard.setWeight(weight, aiColor);
-			
-			
 
 		System.out.println("Pawn Knight Bishop Rook Queen");
-		System.out.println(weight[0] + "      " + " " + weight[1] + "    " + weight[2] + "      " + weight[3] + "\t" + weight[4]);
+		System.out.println(
+				weight[0] + "      " + " " + weight[1] + "    " + weight[2] + "      " + weight[3] + "\t" + weight[4]);
 
-		if(gameBoard.gameOver())
-		{
-			if(gameBoard.AILoser())
-			{
+		if (gameBoard.gameOver()) {
+			if (gameBoard.AILoser()) {
 				listW.remove(testWeight);
 			}
 		}
-			
-		
-//		// simulates a click event to prompt the ai to make the first move
-//		if (aiColor == Piece.Color.White)
-//			mousePressed(null);
 
 	}
 
@@ -226,7 +196,6 @@ public class GamePanel extends JComponent implements MouseListener {
 
 		this.repaint();
 	}
-
 
 	private void loadImages() {
 		try {
@@ -280,8 +249,13 @@ public class GamePanel extends JComponent implements MouseListener {
 			JOptionPane.showMessageDialog(this, message, "Error!", JOptionPane.ERROR_MESSAGE);
 		}
 	}
-
-
+	
+	int count1 = 0;
+	int count2 = 0;
+	Point TwoPreMove1 = new Point(0,0);
+	Point TwoPreMove2 = new Point(0,0);
+	int again1 = 0;
+	int again2 = 0;
 	public void twoplayerAI() {
 		if (status == GameStatus.Started) {
 			invalidPiece = null;
@@ -294,21 +268,64 @@ public class GamePanel extends JComponent implements MouseListener {
 
 				// repaint board immediately, to show the
 				// player's last move
+				
 				this.paintImmediately(0, 0, this.getWidth(), this.getHeight());
 
 				// get a move from the board's ai
 				Move computerMove = gameBoard.getAi().getMove(gameBoard);
 
 				Move computerMove2 = gameBoard.getAi2().getMove(gameBoard);
+	
+				
+				
 
 				if (computerMove != null) {
-					// if a move was returned, make move
+					
+					if( computerMove.getPiece().getLocation().x == TwoPreMove1.x && computerMove.getPiece().getLocation().y == TwoPreMove1.y) again1++;
+					
+					if(again1 > 5)
+					{
+						Piece curPiece = gameBoard.getAi().getMove(gameBoard).getPiece();
+						computerMove = curPiece.getValidMoves(gameBoard, true).get(rand.nextInt(curPiece.getValidMoves(gameBoard, true).size()));
+						again2 = 0;
+					}
+					count1++;
+					
+					
 					gameBoard.doMove(computerMove, false);
+					
+					
+					if(count1 == 2)
+					{
+						TwoPreMove1.x = computerMove.getPiece().getLocation().x;
+						TwoPreMove1.y = computerMove.getPiece().getLocation().y;
+						count1 = 0;
+					}
+					
 				}
 
 				if (computerMove2 != null) {
-					// if a move was returned, make move
+					
+					if( computerMove2.getPiece().getLocation().x == TwoPreMove2.x && computerMove2.getPiece().getLocation().y == TwoPreMove2.y) again2++;
+					
+					if(again2 > 5)
+					{
+						Piece curPiece = gameBoard.getAi2().getMove(gameBoard).getPiece();
+						computerMove2 = curPiece.getValidMoves(gameBoard, true).get(rand.nextInt(curPiece.getValidMoves(gameBoard, true).size()));
+						again2 = 0;
+					}
+					count2++;
+					
+					
 					gameBoard.doMove(computerMove2, false);
+					
+					
+					if(count2 == 2)
+					{
+						TwoPreMove2.x = computerMove2.getPiece().getLocation().x;
+						TwoPreMove2.y = computerMove2.getPiece().getLocation().y;
+						count2 = 0;
+					}
 				}
 
 			}
@@ -336,24 +353,16 @@ public class GamePanel extends JComponent implements MouseListener {
 	public void mousePressed(MouseEvent e) {
 		if (status == GameStatus.Started) {
 			invalidPiece = null;
-			// get board width and height
 			int w = getWidth();
 			int h = getHeight();
-
-			// respond to player action
 			if (gameBoard.getAi() == null || gameBoard.getAi().getColor() != gameBoard.getTurn()) {
 
-				// turn mouse click coordinates into board coordinates
 				Point boardPt = new Point(e.getPoint().x / (w / 8), e.getPoint().y / (h / 8));
 
-				// if no piece has been selected yet
 				if (selectedPiece == null) {
-					// select the piece that was clicked
 					selectedPiece = gameBoard.getPieceAt(boardPt);
 					if (selectedPiece != null) {
-						// get the available moves for the piece
 						okMoves = selectedPiece.getValidMoves(gameBoard, true);
-						// if the piece is of the wrong color, mark as invalid
 						if (selectedPiece.getColor() != gameBoard.getTurn()) {
 							okMoves = null;
 							invalidPiece = selectedPiece;
@@ -362,91 +371,80 @@ public class GamePanel extends JComponent implements MouseListener {
 					}
 				} else {
 
-					// check if the player clicked on the destination of a move
 					Move playerMove = moveWithDestination(boardPt);
 
-					// if so, perform that move
 					if (playerMove != null) {
 						gameBoard.doMove(playerMove, true);
 						selectedPiece = null;
 						okMoves = null;
 					} else {
-						// otherwise, ignore click and reset variables
+
 						selectedPiece = null;
 						okMoves = null;
 					}
 				}
 			}
-			// process an ai move
+			// AI's turn
 			if (gameBoard.getAi() != null && gameBoard.getAi().getColor() == gameBoard.getTurn()) {
 
-
-				// repaint board immediately, to show the
-				// player's last move
 				this.paintImmediately(0, 0, this.getWidth(), this.getHeight());
 
-				// get a move from the board's ai
 				Move computerMove = gameBoard.getAi().getMove(gameBoard);
 
 				if (computerMove != null) {
-					// if a move was returned, make move
 					gameBoard.doMove(computerMove, false);
 				}
 			}
 
-			
-			// if a side cannot make any valid moves
 			if (gameBoard.gameOver()) {
-				// repaint board immediately, before JOptionPane is shown.
-				this.paintImmediately(0, 0, this.getWidth(), this.getHeight());
 
-				// if a king not currently in check, stalemate
+				this.paintImmediately(0, 0, this.getWidth(), this.getHeight());
 				if (gameBoard.getPieceInCheck() == null) {
 					status = GameStatus.Stalemate;
 					JOptionPane.showMessageDialog(this, "Stalemate!", "", JOptionPane.INFORMATION_MESSAGE);
 				} else {
-					// if a king is in check, checkmate
 					status = GameStatus.Checkmate;
-					JOptionPane.showMessageDialog(this, "Checkmate!", "", JOptionPane.INFORMATION_MESSAGE);
+					if(gameBoard.AILoser())
+					{
+						JOptionPane.showMessageDialog(this, "You Won!", "", JOptionPane.INFORMATION_MESSAGE);
+					}
+					else
+					{
+						JOptionPane.showMessageDialog(this, "You Lose!", "", JOptionPane.INFORMATION_MESSAGE);
+					}
 				}
 
 			}
 
-			this.repaint(); // calls paintComponent
+			this.repaint();
 		}
 	}
 
-
-	
-	protected int[] RandArray(int num)
-	{
-		int[] result = { -1,-1,-1,-1,-1};
+	protected int[] RandArray(int num) {
+		int[] result = { -1, -1, -1, -1, -1 };
 		int count = 0;
 		int value;
 		boolean flag;
-		
-		while(count<num)
-		{
+
+		while (count < num) {
 			flag = false;
 			value = rand.nextInt(5);
-		
-			for(int i=0;i<num;i++)
-			{
-				if(result[i] == value)
-				{
+
+			for (int i = 0; i < num; i++) {
+				if (result[i] == value) {
 					flag = true;
 					break;
 				}
 			}
-			if(flag == false)
-			{
+			if (flag == false) {
 				result[count] = value;
 				count++;
 			}
 		}
-		
+
 		return result;
 	}
+
 	@Override
 	protected void paintComponent(Graphics gr) {
 		int w = getWidth();
@@ -474,7 +472,6 @@ public class GamePanel extends JComponent implements MouseListener {
 		// draw the contents of the buffer to the panel
 		gr.drawImage(buffer, 0, 0, this);
 	}
-
 
 	private void drawHelperCircles(Graphics g, int sW, int sH) {
 		// if a piece is selected
@@ -514,7 +511,6 @@ public class GamePanel extends JComponent implements MouseListener {
 		}
 	}
 
-	
 	private void drawPieces(Graphics g, int sW, int sH) {
 		// for each piece on the board
 		for (Piece pc : gameBoard.getPieces()) {
@@ -528,7 +524,6 @@ public class GamePanel extends JComponent implements MouseListener {
 			}
 		}
 	}
-
 
 	private void drawBoard(Graphics g, int sW, int sH) {
 		// draw a light background
@@ -549,7 +544,6 @@ public class GamePanel extends JComponent implements MouseListener {
 		}
 	}
 
-	
 	private Move moveWithDestination(Point pt) {
 		for (Move m : okMoves)
 			if (m.getMoveTo().equals(pt))
@@ -557,14 +551,11 @@ public class GamePanel extends JComponent implements MouseListener {
 		return null;
 	}
 
-
 	public void mouseExited(MouseEvent e) {
 	}
 
-
 	public void mouseEntered(MouseEvent e) {
 	}
-
 
 	public void mouseReleased(MouseEvent e) {
 	}
