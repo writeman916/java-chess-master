@@ -4,41 +4,26 @@ import java.awt.Point;
 import java.util.List;
 import java.util.ArrayList;
 import java.awt.image.BufferedImage;
-/**
- * A subclass of Piece
- * @author Paul
- */
+
 public class Bishop extends Piece{
        
     private int imageNumber = 3;
     
-    /**
-     * Creates a new bishop
-     * @param location location of the piece
-     * @param color color of the piece
-     */
+  
     public Bishop(Point location, Color color) {
         this.numMoves = 0;
         this.color = color;
         this.location = location;
     }
 
-    /**
-     * Private constructor used for making copies of the piece
-     * @param location location of the piece
-     * @param color color of the piece
-     * @param moves the number of moves made by the piece
-     */
+  
     private Bishop(Point location, Color color, int moves) {
         this.numMoves = moves;
         this.color = color;
         this.location = location;
     }
     
-    /**
-    * @return index of the piece's image in an array
-    */
-    
+   
     
     public String getKind()
     {
@@ -55,38 +40,23 @@ public class Bishop extends Piece{
         return imageNumber;
     }
 
-    /**
-     * Returns the white image for this piece
-     * @return white image
-     */
+  
     public BufferedImage getWhiteImage() {
         return whiteImages[2];
     }
     
-    /**
-     * Returns the black image for this piece
-     * @return black image
-     */
+  
     public BufferedImage getBlackImage() {
         return blackImages[2];
     }
     
-    /**
-     * Returns a copy of the bishop
-     * @return a copy of the bishop
-     */
+  
     public Piece clone() {
         return new Bishop(new Point(this.location.x, this.location.y),
                 this.color, this.numMoves);
     }
     
-    /**
-     * A method to get all the valid moves for a piece
-     * @param board the board to get valid moves on for the piece.
-     * @param checkKing whether or not to check if the move puts own king
-     *  in check. Necessary to prevent infinite recursion.
-     * @return List containing valid move points
-     */
+  
     public List<Move> getValidMoves(Board board, boolean checkKing) {       
         List<Move> moves = new ArrayList<Move>();
 
@@ -114,12 +84,7 @@ public class Bishop extends Piece{
         return moves;
     }
     
-    /**
-     * Adds valid moves in a straight line to the list
-     * @param moves list to add to
-     * @param xi x direction of line (-1/0/1)
-     * @param yi y direction of line (-1/0/1)
-     */
+   
     private void addMovesInLine(Board board, List<Move> moves, int xi, int yi) {
         int x = location.x;
         int y = location.y;

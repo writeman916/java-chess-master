@@ -4,19 +4,12 @@ import java.awt.Point;
 import java.awt.image.BufferedImage;
 import java.util.List;
 import java.util.ArrayList;
-/**
- * A subclass of Piece
- * @author Paul
- */
+
 public class Queen extends Piece{
            
     private int imageNumber = 5;
     
-    /**
-     * Creates a new queen
-     * @param location location of the piece
-     * @param color color of the piece
-     */
+
     
     public Queen(Point location, Color color) {
         numMoves = 0;
@@ -24,12 +17,6 @@ public class Queen extends Piece{
         this.location = location;
     }
 
-    /**
-     * Private constructor used for making copies of the piece
-     * @param location location of the piece
-     * @param color color of the piece
-     * @param moves the number of moves made by the piece
-     */
     
     private Queen(Point location, Color color, int moves) {
         this.numMoves = moves;
@@ -37,13 +24,7 @@ public class Queen extends Piece{
         this.location = location;
     }
     
-    /**
-     * Returns the index of the Piece's image in an array.
-     *  Can be used for determining the relative value of the piece.
-     *  Pieces have the following indices:
-     *  [0]:pawn [1]:knight [2]:bishop [3]:rook [4]:queen [5]:king
-     * @return array index
-     */
+   
     public String getKind()
     {
     	return "Queen";
@@ -61,38 +42,21 @@ public class Queen extends Piece{
         return imageNumber;
     }
 
-    /**
-     * Returns the white image for this piece
-     * @return white image
-     */
     public BufferedImage getWhiteImage() {
         return whiteImages[4];
     }
     
-    /**
-     * Returns the black image for this piece
-     * @return black image
-     */
+  
     public BufferedImage getBlackImage() {
         return blackImages[4];
     }
     
-    /**
-     * Returns a copy of the queen
-     * @return a copy of the queen
-     */
+  
     public Piece clone() {
         return new Queen(new Point(this.location.x, this.location.y),
                 this.color, this.numMoves);
     }
-    
-    /**
-     * A method to get all the valid moves for a piece
-     * @param board the board to get valid moves on for the piece.
-     * @param checkKing whether or not to check if the move puts own king
-     *  in check. Necessary to prevent infinite recursion.
-     * @return List containing valid move points
-     */
+ 
     public List<Move> getValidMoves(Board board, boolean checkKing) {
         List<Move> moves = new ArrayList<Move>();
 
@@ -125,19 +89,14 @@ public class Queen extends Piece{
         return moves;
     }
     
-    /**
-     * Adds valid moves in a straight line to the list
-     * @param moves list to add to
-     * @param xi x direction (-1/0/1)
-     * @param yi y direction (-1/0/1)
-     */
+
     private void addMovesInLine(Board board, List<Move> moves, int xi, int yi) {
         int x = location.x;
         int y = location.y;
         
         Point pt = new Point(x + xi, y + yi);
         Piece pc;
-        
+        	
         while(board.validLocation(pt)) {
             pc = board.getPieceAt(pt);
             if(pc == null) {

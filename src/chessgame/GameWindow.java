@@ -1,8 +1,4 @@
-/*
- * GameForm.java
- *
- * Created on March 15, 2010, 2:48 AM
- */
+
 package chessgame;
 
 import java.awt.event.ActionEvent;
@@ -41,86 +37,13 @@ public class GameWindow extends javax.swing.JFrame{
     
     GamePanel gameScreen;
     
-    /** 
-     * Creates new GameWindow 
-     */
+
     public GameWindow() {
         initComponents();
         init();
-        initPanel();
         
     }
    
-    /**
-     * Initializes the game in the form
-     */
-    
-
-    private void initPanel()
-    {
-    	
-    	JLabel Pawn = new JLabel("Pawn:");
-		Pawn.setBounds(900, 150, 50, 50);
-		jPanel1.add(Pawn);
-		
-		JLabel PawnValue = new JLabel();
-		PawnValue.setBounds(950, 150, 50, 50);
-		PawnValue.setText(String.valueOf(gameScreen.gameBoard.getPieces().get(7).getImageNumber()));
-		jPanel1.add(PawnValue);
-		
-		
-		JLabel Rook = new JLabel("Rook:");
-		Rook.setBounds(900, 200, 50, 50);
-		jPanel1.add(Rook);
-		
-		JLabel RookValue = new JLabel();
-		RookValue.setBounds(950, 200, 50, 50);
-		RookValue.setText(String.valueOf(gameScreen.gameBoard.getPieces().get(8).getImageNumber()));
-		jPanel1.add(RookValue);
-		
-		
-		
-		JLabel Knight = new JLabel("Knight:");
-		Knight.setBounds(900, 250, 50, 50);
-		jPanel1.add(Knight);
-		
-		JLabel KnightValue = new JLabel();
-		KnightValue.setBounds(950, 250, 50, 50);
-		KnightValue.setText(String.valueOf(gameScreen.gameBoard.getPieces().get(9).getImageNumber()));
-		jPanel1.add(KnightValue);
-		
-		
-		JLabel Bishop = new JLabel("Bishop:");
-		Bishop.setBounds(900, 300, 50, 50);
-		jPanel1.add(Bishop);
-		
-		JLabel BishopValue = new JLabel();
-		BishopValue.setBounds(950, 300, 50, 50);
-		BishopValue.setText(String.valueOf(gameScreen.gameBoard.getPieces().get(10).getImageNumber()));
-		jPanel1.add(BishopValue);
-		
-		
-		
-		JLabel Queen = new JLabel("Queen:");
-		Queen.setBounds(900, 350, 50, 50);
-		jPanel1.add(Queen);
-		
-		JLabel QueenValue = new JLabel();
-		QueenValue.setBounds(950, 350, 50, 50);
-		QueenValue.setText(String.valueOf(gameScreen.gameBoard.getPieces().get(11).getImageNumber()));
-		
-		
-//		System.out.println("ngoai"+gameScreen.gameBoard.getPieces().get(11).getImageNumber());
-		
-		
-		jPanel1.add(QueenValue);
-		
-		
-		
-		
-		
-		
-    }
     
     private void init()
     {
@@ -170,11 +93,6 @@ public class GameWindow extends javax.swing.JFrame{
 		});
 		jPanel1.add(twoAI);
 		
-		
-		
-		
-		
-		initPanel();
     }
     
     private void initComponents() {
@@ -305,8 +223,6 @@ private void jMenuItem_New2PActionPerformed(java.awt.event.ActionEvent evt) {//G
 
 private void jMenuItem_New1PActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem_New1PActionPerformed
     gameScreen.newAiGame();
-    initPanel();
-    repaint();
 }//GEN-LAST:event_jMenuItem_New1PActionPerformed
 
 private void jPanel1_componentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jPanel1_componentResized
@@ -320,9 +236,7 @@ private void jPanel1_componentResized(java.awt.event.ComponentEvent evt) {//GEN-
     }
 }//GEN-LAST:event_jPanel1_componentResized
 
-    /**
-    * @param args the command line arguments
-    */
+
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
